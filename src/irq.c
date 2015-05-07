@@ -25,7 +25,7 @@ void keyboard_interrupt() {
 	uint8_t kbd_code = inb(KBD_PORT);
 	if (!(kbd_code & 0x80)) {
 		terminal_putchar(keymap_lower[kbd_code]);
-		current_char = keymap_lower[kbd_code];
+		*current_char = keymap_lower[kbd_code];
 		current_char++;
 		terminal_putchar(*current_char);
 	}
