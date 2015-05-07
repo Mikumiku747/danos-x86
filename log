@@ -1,0 +1,8 @@
+V0.1.1:
+	- Added basic test writing
+	- Set up my own GDT and IDT
+	- Disk Release V0.1
+V0.1.2:
+	- Added interrupt handlers for General protection fault, double fault, and keyboard
+	- Typing now puts keys on the terminal
+	- Disk release v0.2
