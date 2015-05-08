@@ -10,7 +10,7 @@
 #include "vga.c"
 #include "PIC8259.c"
 
-//Test out our assembly function
+//Test out our assembly functions
 extern int Sum();
 extern int LifeUniverseAndEverything();
 
@@ -106,7 +106,9 @@ void kernel_main()
 	//asm("int $0x21"); //For testing interrupts
 
 	while (1) {
-		while (*current_char != '\n'); //Wait for the user to make a newline
+		while (*(current_char - 1) != 'n') { //Wait for the user to make a newline
+			terminal_putentryat(*(current_char - 1), make_color(COLOR_RED, COLOR_BLACK), 1, 1); //Debug the last entered character in the meantime
+		}
 		terminal_writestring("Command entered: ");
 		for (int i = 0; command_buffer[i] != '\n'; i++) {
 			terminal_putchar(command_buffer[i]); //Print off thier command

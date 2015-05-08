@@ -27,7 +27,7 @@ void keyboard_interrupt() {
 		terminal_putchar(keymap_lower[kbd_code]);
 		*current_char = keymap_lower[kbd_code];
 		current_char++;
-		terminal_putchar(*current_char);
+		terminal_putchar(*(current_char-1)); //Debug, should put in the character the user just entered
 	}
 	PIC_sendEOI(1); //Send the END_OF_INTERRUPT code to the PIC, so it can let a new interrupt through
 }
