@@ -3,8 +3,55 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Files", "Project Files", "{6907328F-EECA-4B75-9DFE-56F21AD9DB89}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Makefile = Makefile
+		README.md = README.md
+		test_rig.bxrc = test_rig.bxrc
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source Files", "Source Files", "{CFA8C35F-56FC-4DCB-AEF9-BB8C0A98F4D0}"
+	ProjectSection(SolutionItems) = preProject
+		src\linker.ld = src\linker.ld
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assembly", "Assembly", "{1938E10A-0DC9-4E04-91CC-DCB12841151D}"
+	ProjectSection(SolutionItems) = preProject
+		src\boot.s = src\boot.s
+		src\gdt.s = src\gdt.s
+		src\hardware.s = src\hardware.s
+		src\idt.s = src\idt.s
+		src\interrupts.s = src\interrupts.s
+		src\irq.s = src\irq.s
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C", "C", "{0E66F24F-F122-462A-ADC6-E3A25C3AA9CA}"
+	ProjectSection(SolutionItems) = preProject
+		src\conversions.c = src\conversions.c
+		src\gdt.c = src\gdt.c
+		src\hardware.c = src\hardware.c
+		src\idt.c = src\idt.c
+		src\io.c = src\io.c
+		src\irq.c = src\irq.c
+		src\kernel.c = src\kernel.c
+		src\PIC8259.c = src\PIC8259.c
+		src\vga.c = src\vga.c
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Headers", "Headers", "{BF3AACC7-1491-4904-B342-ACD2C955770D}"
+	ProjectSection(SolutionItems) = preProject
+		src\mem.h = src\mem.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1938E10A-0DC9-4E04-91CC-DCB12841151D} = {CFA8C35F-56FC-4DCB-AEF9-BB8C0A98F4D0}
+		{0E66F24F-F122-462A-ADC6-E3A25C3AA9CA} = {CFA8C35F-56FC-4DCB-AEF9-BB8C0A98F4D0}
+		{BF3AACC7-1491-4904-B342-ACD2C955770D} = {CFA8C35F-56FC-4DCB-AEF9-BB8C0A98F4D0}
 	EndGlobalSection
 EndGlobal
