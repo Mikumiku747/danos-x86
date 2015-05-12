@@ -1,3 +1,6 @@
+#ifndef KERNEL_C
+#define KERNEL_C
+
 #include <stddef.h>
 #include <stdint-gcc.h>
 #include "mem.h"
@@ -35,16 +38,15 @@ void lookaroundyou() {
 	}
 }
 
-char command_buffer[80 * 25];
-char *current_char = command_buffer;
+volatile char command_buffer[80 * 25];
+volatile int current_char = 0;
 
 #if defined(__cplusplus)
 extern "C" /* Use C linkage for kernel_main. */
 #endif
 void kernel_main()
 {
-	terminal_initialize();
-	terminal_setcolor(make_color(COLOR_GREEN, COLOR_BLACK));
+	terminal_initialize(make_color(COLOR_RED, COLOR_LIGHT_GREY));
 	//Load our own GDT and IDT
 	terminal_writestring("Installing GDT...");
 	gdt_install();
@@ -100,24 +102,27 @@ void kernel_main()
 	asm("STI");
 	PIC_clear_mask(1);
 	terminal_writestring("Done\n");
-	terminal_setcolor(make_color(COLOR_CYAN, COLOR_BLACK));
-	terminal_writestring("Now waiting for keyboard input:\n");
+	terminal_setcolor(make_color(COLOR_CYAN, COLOR_LIGHT_GREY));
+	terminal_writestring("Now waiting for keyboard input:\n>>>");
 	//lookaroundyou(); //For shits and giggles
 	//asm("int $0x21"); //For testing interrupts
 
 	while (1) {
-		while (*(current_char - 1) != 'n') { //Wait for the user to make a newline
-			terminal_putentryat(*(current_char - 1), make_color(COLOR_RED, COLOR_BLACK), 1, 1); //Debug the last entered character in the meantime
+		while (command_buffer[current_char-1] != '\n' || current_char > 1999) { //Wait for the user to make a newline
+			terminal_putentryat(command_buffer[current_char-1], make_color(COLOR_WHITE, COLOR_BLACK), 0, 0); //Debug the last entered character in the meantime
+			terminal_putentryat((current_char) + '0', make_color(COLOR_WHITE, COLOR_BLACK), 0, 1); //Debug how far along the current char is
 		}
-		terminal_writestring("Command entered: ");
-		for (int i = 0; command_buffer[i] != '\n'; i++) {
+		terminal_writestring("-> ");
+		for (int i = 0; i < current_char; i++) {
 			terminal_putchar(command_buffer[i]); //Print off thier command
 		}
+		terminal_writestring(">>>");
 		for (int i = 0; i < 80 * 25; i++) {
 			command_buffer[i] = 0; //Zero the character buffer
 		}
-		current_char = command_buffer;
+		current_char = 0;
 	}
 	//Kernel is done
 	terminal_writestring("\nKernel finished execution, hanging!");
 }
+#endif

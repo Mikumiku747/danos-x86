@@ -63,6 +63,7 @@ void idt_install()
 	/* Add any new ISRs to the IDT here using idt_set_gate */
 	idt_set_gate(0x8, (unsigned long)&double_fault, 0x08, 0x8E); //Double fault exception
 	idt_set_gate(0xD, (unsigned long)&general_protection_fault, 0x08, 0x8E); //Double fault exception
+	idt_set_gate(0x20, (unsigned long)&handle_pit, 0x08, 0x8E); //Keyboard Handler
 	idt_set_gate(0x21, (unsigned long)&handle_kbd, 0x08, 0x8E); //Keyboard Handler
 
 	/* Points the processor's internal register to the new IDT */

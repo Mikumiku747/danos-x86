@@ -58,11 +58,11 @@ size_t terminal_column;
 uint8_t terminal_color;
 uint16_t* terminal_buffer;
 
-void terminal_initialize()
+void terminal_initialize(uint8_t color)
 {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_color = make_color(COLOR_LIGHT_GREY, COLOR_BLACK);
+	terminal_color = color;
 	terminal_buffer = (uint16_t*)0xB8000;
 	for (size_t y = 0; y < VGA_HEIGHT; y++)
 	{

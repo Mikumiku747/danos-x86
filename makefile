@@ -8,7 +8,7 @@ AS = i686-elf-as
 BOCHS = bochs.exe
 GRUB-MKRESCUE = grub-mkrescue
 CFLAGS = -ffreestanding -O2 -Wall -Wextra -Werror -std=$(C-STANDARD)
-BINVER = 0.1.3
+BINVER = 0.1.4
 ISOVER = $(BINVER)
 
 # A list of all the source files the kernel uses
