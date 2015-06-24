@@ -10,6 +10,7 @@ char inttochar(int in) {
 	return out;
 }
 
+//Converts a single digit character to an integer
 int chartoint(char in) {
 	int out;
 	out = in - '0';
