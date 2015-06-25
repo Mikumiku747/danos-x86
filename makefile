@@ -21,7 +21,7 @@ sourcefiles = \
 	src/hardware.c \
 	src/gdt.c \
 	src/idt.c \
-	src/irq.c
+	src/irq.c \
 
 objectfiles = \
 	build/boot.o \

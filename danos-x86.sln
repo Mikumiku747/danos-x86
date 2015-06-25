@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C", "C", "{0E66F24F-F122-46
 		src\gdt.c = src\gdt.c
 		src\hardware.c = src\hardware.c
 		src\idt.c = src\idt.c
+		input.c = input.c
 		src\io.c = src\io.c
 		src\irq.c = src\irq.c
 		src\kernel.c = src\kernel.c

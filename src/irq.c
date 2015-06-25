@@ -10,6 +10,7 @@
 #include "vga.c"
 #include "idt.c"
 #include "PIC8259.c"
+#include "input.c"
 
 
 extern void handle_kbd();
@@ -22,6 +23,9 @@ extern volatile char command_buffer[];
 extern volatile int current_char;
 extern int increment_test;
 
+extern volatile char *input_buffer;
+extern volatile char *next_input;
+
 char keymap_lower[] = "##1234567890-=\b\tqwertyuiop[]\n#asdfghjkl;\'`#\\zxcvbnm,./#*# #1234567890##789-456+1230.###AB";
 char keymap_upper[] = "##!@#$%^&*()_+\b\tQWERTYUIOP{}\n#ASDFGHJKL:\"~#|ZXCVBNM<>?#*# #1234567890##789-456+1230.###AB";
 
@@ -30,7 +34,7 @@ int CAPSLOCK = 0;
 int NUMLOCK = 0;
 
 void keyboard_interrupt() {
-	uint8_t kbd_code = inb(KBD_PORT);
+	/*uint8_t kbd_code = inb(KBD_PORT);
 	switch (kbd_code) {
 	case 0x2A:
 		SHIFT = 1;
@@ -65,7 +69,9 @@ void keyboard_interrupt() {
 			current_char++;
 		}
 		break;
-	}
+	}*/
+	uint8_t kbd_code = inb(KBD_PORT);
+	*++next_input = kbd_code;
 	PIC_sendEOI(1); //Send the END_OF_INTERRUPT code to the PIC, so it can let a new interrupt through
 }
 
