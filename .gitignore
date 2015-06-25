@@ -25,6 +25,3 @@ $RECYCLE.BIN/
 
 #Ignore the contents of the bin folder entirely
 build
-
-#Ignore the SDF thingy
-*.sdf
